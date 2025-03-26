@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Mukta:wght@200;300;400;500;600;700;800&family=Pridi:wght@200;300;400;500;600;700&family=Zen+Old+Mincho&display=swap" rel="stylesheet">
+    <title>Custom Text Display</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: JetBrains Mono, monospace;
+            background-color: white;
+            color: black;
+        }
+        #display-text {
+            font-size: 100px;
+            font-weight: bold;
+            margin-top: 50px;
+        }
+        .controls {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Custom Text Display</h1>
+    <div id="display-text">Your Text Here</div>
+    <div class="controls">
+        <label>Custom Text: <input type="text" id="text-input" value="Your Text Here"></label>
+        <br>
+        <label>Font Size: <input type="range" id="font-size" min="50" max="200" value="100"></label>
+        <br>
+        <label>Text Color: <input type="color" id="text-color" value="#000000"></label>
+        <br>
+        <label>Background Color: <input type="color" id="bg-color" value="#ffffff"></label>
+    </div>
+
+    <script>
+        const displayText = document.getElementById("display-text");
+        const textInput = document.getElementById("text-input");
+        const fontSize = document.getElementById("font-size");
+        const textColor = document.getElementById("text-color");
+        const bgColor = document.getElementById("bg-color");
+
+        textInput.addEventListener("input", () => {
+            displayText.textContent = textInput.value;
+        });
+        fontSize.addEventListener("input", () => {
+            displayText.style.fontSize = fontSize.value + "px";
+        });
+        textColor.addEventListener("input", () => {
+            displayText.style.color = textColor.value;
+        });
+        bgColor.addEventListener("input", () => {
+            document.body.style.backgroundColor = bgColor.value;
+        });
+    </script>
+</body>
+</html>

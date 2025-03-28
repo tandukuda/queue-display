@@ -2,33 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Update Name Remotely</title>
+    <title>Name Input</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 400px;
-            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: white;
             padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 300px;
         }
         input, button {
-            width: 100%;
             margin: 10px 0;
             padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
         }
     </style>
 </head>
 <body>
-    <h2>Remote Name Update</h2>
-    <input type="password" id="passwordInput" placeholder="Enter Password">
-    <input type="text" id="nameInput" placeholder="Enter new name">
-    <button onclick="updateName()">Update Name</button>
+    <div class="container">
+        <h2>Enter Name</h2>
+        <input type="password" id="passwordInput" placeholder="Enter Password">
+        <input type="text" id="nameInput" placeholder="Enter your name">
+        <button onclick="sendName()">Submit</button>
+    </div>
 
     <script>
-        function updateName() {
+        function sendName() {
             const name = document.getElementById('nameInput').value;
             const password = document.getElementById('passwordInput').value;
-            
-            fetch('https://queue-name-server.glitch.me/update-name', {
+
+            fetch('/update-name', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

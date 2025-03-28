@@ -2,48 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Name Input</title>
+    <title>Update Name Remotely</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-        .container {
-            background-color: white;
+            max-width: 400px;
+            margin: 0 auto;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            text-align: center;
         }
         input, button {
+            width: 100%;
             margin: 10px 0;
             padding: 10px;
-            width: 100%;
-            box-sizing: border-box;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Enter Name</h2>
-        <input type="text" id="nameInput" placeholder="Enter your name">
-        <button onclick="sendName()">Submit</button>
-    </div>
+    <h2>Remote Name Update</h2>
+    <input type="password" id="passwordInput" placeholder="Enter Password">
+    <input type="text" id="nameInput" placeholder="Enter new name">
+    <button onclick="updateName()">Update Name</button>
 
     <script>
-        function sendName() {
+        function updateName() {
             const name = document.getElementById('nameInput').value;
-            fetch('/update-name', {
+            const password = document.getElementById('passwordInput').value;
+            
+            fetch('https://queue-name-server.glitch.me/update-name', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name: name })
+                body: JSON.stringify({ 
+                    name: name,
+                    password: password 
+                })
             })
             .then(response => response.json())
             .then(data => {
@@ -51,6 +44,7 @@
             })
             .catch(error => {
                 console.error('Error:', error);
+                alert('Failed to update name');
             });
         }
     </script>

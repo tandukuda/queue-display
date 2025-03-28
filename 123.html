@@ -2,21 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Queue Display</title>
+    <title>Name Display</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; background: black; color: white; font-size: 50px; }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: transparent;
+        }
+        #displayName {
+            font-size: 4rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
     </style>
 </head>
 <body>
-    <h1 id="queueName">Waiting...</h1>
+    <div id="displayName">Waiting for name...</div>
 
     <script>
-        const socket = new WebSocket("wss://queue-name-server.glitch.me");
+        function updateName() {
+            fetch('/get-name')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('displayName').textContent = data.name;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
 
-        socket.onmessage = function(event) {
-            document.getElementById("queueName").textContent = event.data;
-        };
+        // Update name every 2 seconds
+        updateName();
+        setInterval(updateName, 2000);
     </script>
 </body>
 </html>

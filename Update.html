@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Queue Name</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 20px; }
+        input, button { font-size: 20px; padding: 10px; margin: 10px; }
+    </style>
+</head>
+<body>
+    <h2>Update Queue Name</h2>
+    <input type="text" id="nameInput" placeholder="Enter name">
+    <button onclick="updateQueue()">Update</button>
+
+    <script>
+        const socket = new WebSocket("wss://your-websocket-server.com");
+
+        function updateQueue() {
+            const name = document.getElementById("nameInput").value;
+            socket.send(name);
+        }
+    </script>
+</body>
+</html>

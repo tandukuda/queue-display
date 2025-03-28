@@ -15,8 +15,26 @@
     <button onclick="updateQueue()">Update</button>
 
     <script>
-        const socket = new WebSocket("wss://queue-name-server.glitch.me");  socket.onopen = function() {     console.log("Connected to WebSocket server!"); };  socket.onerror = function(error) {     console.log("WebSocket Error:", error); };  function updateQueue() {     const name = document.getElementById("nameInput").value;     if (socket.readyState === WebSocket.OPEN) {         socket.send(name);         console.log("Sent:", name);     } else {         console.log("WebSocket is not connected.");     } }
+        const socket = new WebSocket("wss://queue-name-server.glitch.me");
 
+socket.onopen = function() {
+    console.log("Connected to WebSocket server!");
+};
+
+socket.onerror = function(error) {
+    console.log("WebSocket Error:", error);
+};
+
+function updateQueue() {
+    const name = document.getElementById("nameInput").value;
+    if (socket.readyState === WebSocket.OPEN) {
+        socket.send(name);
+        console.log("Sent:", name);
+    } else {
+        console.log("WebSocket is not connected.");
+    }
+}
+       
         function updateQueue() {
             const name = document.getElementById("nameInput").value;
             socket.send(name);
